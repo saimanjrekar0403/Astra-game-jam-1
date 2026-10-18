@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://oefapwlokg0"]
+
+[ext_resource type="Script" uid="uid://c2t7uj4lukqsj" path="res://scripts/obsticle.gd" id="1_2p81s"]
+[ext_resource type="Texture2D" uid="uid://dxx8s5qphcjkg" path="res://tilemap_packed.png" id="2_rvx1i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73gig"]
+atlas = ExtResource("2_rvx1i")
+region = Rect2(144, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgdr8"]
+atlas = ExtResource("2_rvx1i")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dee31"]
+atlas = ExtResource("2_rvx1i")
+region = Rect2(176, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efaup"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73gig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgdr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dee31")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_42hng"]
+radius = 5.0
+height = 12.0
+
+[node name="Obsticle" type="Area2D" unique_id=2135548877 groups=["obsticle"]]
+z_index = 1
+scale = Vector2(2, 2)
+collision_mask = 2
+script = ExtResource("1_2p81s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1011075232]
+sprite_frames = SubResource("SpriteFrames_efaup")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=691121927]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_42hng")

@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://ct83mitqsnxy2"]
+
+[ext_resource type="Script" uid="uid://bijikfw15pe46" path="res://scripts/main_level.gd" id="1_ikcpc"]
+[ext_resource type="PackedScene" uid="uid://byl5fvo606pi2" path="res://Scenes/tile_map.tscn" id="2_5erdv"]
+[ext_resource type="Texture2D" uid="uid://dxx8s5qphcjkg" path="res://tilemap_packed.png" id="3_5erdv"]
+[ext_resource type="Script" uid="uid://bdmd3iyv17ymv" path="res://scripts/character_body_2d.gd" id="3_qbrl8"]
+[ext_resource type="Script" uid="uid://dggkbey0vd6aa" path="res://Scenes/canvas_layer.gd" id="5_a2ia3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbrl8"]
+atlas = ExtResource("3_5erdv")
+region = Rect2(160, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2ia3"]
+atlas = ExtResource("3_5erdv")
+region = Rect2(176, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efaup"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbrl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2ia3")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efaup"]
+size = Vector2(12, 12)
+
+[node name="Main level" type="Node2D" unique_id=815096558]
+script = ExtResource("1_ikcpc")
+
+[node name="TileMap" parent="." unique_id=1040199975 instance=ExtResource("2_5erdv")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=19403863]
+zoom = Vector2(3, 3)
+
+[node name="Skier" type="CharacterBody2D" parent="." unique_id=590056444 groups=["Player"]]
+z_index = 100
+position = Vector2(0, -96)
+scale = Vector2(2, 2)
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("3_qbrl8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Skier" unique_id=1104897831]
+sprite_frames = SubResource("SpriteFrames_efaup")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Skier" unique_id=1566154520]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_efaup")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1784047757]
+script = ExtResource("5_a2ia3")
+
+[node name="Timer" type="Label" parent="CanvasLayer" unique_id=1906741523]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 88.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+
+[node name="Pause" type="Label" parent="CanvasLayer" unique_id=2089120483]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.09808908, 0.00018010527, 0.5828875, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "P for pause"
